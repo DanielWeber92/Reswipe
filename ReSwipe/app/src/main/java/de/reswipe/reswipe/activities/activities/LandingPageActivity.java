@@ -16,6 +16,8 @@ import de.reswipe.reswipe.R;
 
 public class LandingPageActivity extends AppCompatActivity {
 
+    private Recipe recipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +32,8 @@ public class LandingPageActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                Recipe value = dataSnapshot.getValue(Recipe.class);
-                Log.d("onDataChange", "Value is: " + value.name + value.image);
+                recipe = dataSnapshot.getValue(Recipe.class);
+                Log.d("onDataChange", "Value is: " + recipe.name + recipe.image);
             }
 
             @Override
@@ -40,6 +42,12 @@ public class LandingPageActivity extends AppCompatActivity {
                 Log.w("onCancelled", "Failed to read value.", error.toException());
             }
         });
-    }
 
+    }
+    
+    private void setImage() {
+        recipe.loadImage();
+        // imageView.setImageBitmap(bmp);
+
+    }
 }
