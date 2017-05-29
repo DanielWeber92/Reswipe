@@ -1,9 +1,11 @@
-package de.reswipe.reswipe;
+package de.reswipe.reswipe.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class LandingPage extends AppCompatActivity {
+import de.reswipe.reswipe.R;
+
+public class LandingPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
