@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1070418610974",
+    "firebase_url": "https://reswipe-db3a4.firebaseio.com",
+    "project_id": "reswipe-db3a4",
+    "storage_bucket": "reswipe-db3a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070418610974:android:979d0b23d6c41034",
+        "android_client_info": {
+          "package_name": "com.reswipe.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070418610974-h2j5m186392nmfvmjoec4j4pmn5nu3cl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7rVFNarhSiP24OQj9vK3gaOdUJ4Xt-8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
