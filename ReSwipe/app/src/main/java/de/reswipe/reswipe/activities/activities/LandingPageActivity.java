@@ -2,13 +2,15 @@ package de.reswipe.reswipe.activities.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.koushikdutta.ion.Ion;
 
 import de.reswipe.reswipe.activities.models.Recipe;
 
@@ -17,11 +19,15 @@ import de.reswipe.reswipe.R;
 public class LandingPageActivity extends AppCompatActivity {
 
     private Recipe recipe;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
+
+        imageView = (ImageView)this.findViewById(R.id.landingPageRecipeImage);
+        imageView.setVisibility(View.GONE);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("recipes");
@@ -30,24 +36,24 @@ public class LandingPageActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 recipe = dataSnapshot.getValue(Recipe.class);
-                Log.d("onDataChange", "Value is: " + recipe.name + recipe.image);
+                setImage();
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("onCancelled", "Failed to read value.", error.toException());
             }
         });
-
     }
-    
-    private void setImage() {
-        recipe.loadImage();
-        // imageView.setImageBitmap(bmp);
 
+    private void setImage() {
+        Ion.with(imageView)
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.error_image)
+                .animateLoad(spinAnimation)
+                .animateIn(fadeInAnimation)
+                .load("http://example.com/image.png");
+        recipe.loadImage();mageView.setImageBitmap(recipe.downloadedImage);
+        i
     }
 }
