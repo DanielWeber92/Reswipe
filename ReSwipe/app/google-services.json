@@ -46,6 +46,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1070418610974-8knqend8c1lm5abkke33hl5ioc6o1c25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "de.reswipe.reswipe",
+            "certificate_hash": "fc64f9367879b0cc394a7a4ce546822e396fe7fe"
+          }
+        },
+        {
           "client_id": "1070418610974-ldhsrl629h7t35ljeqtodqrcvuv1qljk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
