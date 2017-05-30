@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ReSwipe</string>
+    <string name="recipe_name">Name:</string>
+    <string name="recipe_time">Time:</string>
+    <string name="recipe_description">Description:</string>
+    <string name="recipe_ingredients">Ingredients:</string>
+    <string name="recipe_details_titel">Recipe Details:</string>
 </resources>
