@@ -8,27 +8,29 @@
     tools:context="de.reswipe.reswipe.activities.activities.LandingPageActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/dislike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:text="Dislike"
+        android:onClick="subscribeRecipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/kochliste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Kochliste"
+        android:onClick="subscribeRecipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -53,5 +55,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewValue"
+        android:layout_width="342dp"
+        android:layout_height="22dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LandingPageImage"
+        tools:layout_editor_absoluteY="425dp" />
 
 </android.support.constraint.ConstraintLayout>

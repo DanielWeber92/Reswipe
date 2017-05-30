@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,10 @@ public class LandingPageActivity extends AppCompatActivity {
 
     private boolean firstEvent = true;
 
+    private Button like;
+    private Button dislike;
+    private Button kochliste;
+
     FirebaseDatabase database;
     DatabaseReference myRef;
 
@@ -45,6 +51,32 @@ public class LandingPageActivity extends AppCompatActivity {
         this.addMockRecipes();
         this.subscribeRecipeCount();
 
+        like =(Button)findViewById(R.id.like);
+        dislike =(Button)findViewById(R.id.dislike);
+        kochliste =(Button)findViewById(R.id.kochliste);
+        /*TextView textViewRecipeName = (TextView) findViewById(R.id.textViewValue);
+        textViewRecipeName.setText(recipe.name);*/
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRef.child("likes").push().setValue(recipe);
+                finish();
+            }
+        });
+        dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRef.child("dislikes").push().setValue(recipe);
+                finish();
+            }
+        });
+        kochliste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRef.child("kochliste").push().setValue(recipe);
+                finish();
+            }
+        });
     }
 
     public void subscribeRecipeCount() {
