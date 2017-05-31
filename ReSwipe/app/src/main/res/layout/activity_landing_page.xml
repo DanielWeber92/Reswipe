@@ -50,7 +50,6 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="showRecipeDetails"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -61,10 +60,15 @@
         android:layout_width="342dp"
         android:layout_height="22dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LandingPageImage"
-        tools:layout_editor_absoluteY="425dp" />
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/kochliste"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginLeft="8dp" />
 
 </android.support.constraint.ConstraintLayout>
