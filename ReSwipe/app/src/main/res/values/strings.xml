@@ -5,4 +5,8 @@
     <string name="recipe_description">Description:</string>
     <string name="recipe_ingredients">Ingredients:</string>
     <string name="recipe_details_titel">Recipe Details:</string>
+    <string name="drawer_open">Open navigation</string>
+    <string name="drawer_close">Close navigation</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search:</string>
 </resources>

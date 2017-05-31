@@ -1,113 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="de.reswipe.reswipe.activities.activities.RecipeDetailsActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="de.reswipe.reswipe.activities.activities.RecipeDetailsActivity">
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/recipe_name"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="@+id/textViewDescription" />
+<TextView
+    android:id="@+id/textViewName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="@string/recipe_name"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginRight="0dp"
+    app:layout_constraintRight_toRightOf="@+id/textViewDescription" />
 
 
-    <TextView
-        android:id="@+id/textViewNameValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toRightOf="@+id/textViewName"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewDescriptionValue" />
+<TextView
+    android:id="@+id/textViewNameValue"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintLeft_toRightOf="@+id/textViewName"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="@+id/textViewDescriptionValue" />
 
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/recipe_time"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameValue"
-        app:layout_constraintRight_toLeftOf="@+id/textViewTimeValue"
-        android:layout_marginRight="16dp" />
+<TextView
+    android:id="@+id/textViewTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="@string/recipe_time"
+    app:layout_constraintTop_toBottomOf="@+id/textViewNameValue"
+    app:layout_constraintRight_toLeftOf="@+id/textViewTimeValue"
+    android:layout_marginRight="16dp" />
 
-    <TextView
-        android:id="@+id/textViewTimeValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toRightOf="@+id/textViewTime"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameValue"
-        app:layout_constraintLeft_toLeftOf="@+id/textViewDescriptionValue" />
+<TextView
+    android:id="@+id/textViewTimeValue"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintLeft_toRightOf="@+id/textViewTime"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewNameValue"
+    app:layout_constraintLeft_toLeftOf="@+id/textViewDescriptionValue" />
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/recipe_description"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textViewDescriptionValue"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTimeValue" />
+<TextView
+    android:id="@+id/textViewDescription"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/recipe_description"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/textViewDescriptionValue"
+    app:layout_constraintTop_toBottomOf="@+id/textViewTimeValue" />
 
-    <TextView
-        android:id="@+id/textViewDescriptionValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toRightOf="@+id/textViewDescription"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTimeValue" />
+<TextView
+    android:id="@+id/textViewDescriptionValue"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintLeft_toRightOf="@+id/textViewDescription"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewTimeValue" />
 
-    <TextView
-        android:id="@+id/textViewIngredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/recipe_ingredients"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textViewIngredientsValue"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionValue" />
+<TextView
+    android:id="@+id/textViewIngredients"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/recipe_ingredients"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/textViewIngredientsValue"
+    app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionValue" />
 
-    <TextView
-        android:id="@+id/textViewIngredientsValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toRightOf="@+id/textViewIngredients"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionValue" />
+<TextView
+    android:id="@+id/textViewIngredientsValue"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="17dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintHorizontal_bias="0.502"
+    app:layout_constraintLeft_toRightOf="@+id/textViewIngredients"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionValue" />
 
-    <ImageView
-        android:id="@+id/RecipeDetailsImageView"
-        android:layout_width="353dp"
-        android:layout_height="315dp"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewIngredientsValue" />
+<ImageView
+    android:id="@+id/RecipeDetailsImageView"
+    android:layout_width="353dp"
+    android:layout_height="315dp"
+    app:layout_constraintHorizontal_bias="0.516"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_marginTop="8dp"
+    app:layout_constraintTop_toBottomOf="@+id/textViewIngredientsValue" />
 
 
 </android.support.constraint.ConstraintLayout>

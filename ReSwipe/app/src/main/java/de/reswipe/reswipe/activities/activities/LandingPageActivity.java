@@ -1,13 +1,27 @@
 package de.reswipe.reswipe.activities.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+
+import android.content.res.Configuration;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +37,7 @@ import de.reswipe.reswipe.activities.models.Recipe;
 
 import de.reswipe.reswipe.R;
 import de.reswipe.reswipe.activities.util.DownloadImageTask;
+import de.reswipe.reswipe.activities.util.OnSwipeTouchListener;
 
 public class LandingPageActivity extends AppCompatActivity {
 
@@ -31,11 +46,14 @@ public class LandingPageActivity extends AppCompatActivity {
     private Recipe recipe;
     private int recipeCount;
 
-    private boolean firstEvent = true;
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private ArrayAdapter<String> mAdapter;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
+    private ImageView imageView;
 
-    private Button like;
-    private Button dislike;
-    private Button kochliste;
+    private boolean firstEvent = true;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -45,11 +63,144 @@ public class LandingPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.navDrawer);
+        mActivityTitle = getTitle().toString();
+
+        addDrawerItems();
+        setupDrawer();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        imageView = (ImageView) findViewById(R.id.LandingPageImage);
+        imageView.setOnTouchListener(new OnSwipeTouchListener(LandingPageActivity.this) {
+            public void onSwipeTop() {
+                kochliste(null);
+                Toast.makeText(LandingPageActivity.this, "saved", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                like(null);
+                Toast.makeText(LandingPageActivity.this, "liked", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                dislike(null);
+                Toast.makeText(LandingPageActivity.this, "disliked", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         this.database = FirebaseDatabase.getInstance();
         this.myRef = database.getReference("recipes");
         
         this.addMockRecipes();
         this.subscribeRecipeCount();
+    }
+
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu();
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    private void addDrawerItems() {
+        String[] osArray = { "Recipe List", "Shopping List", "Connect Account"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(LandingPageActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+                mDrawerLayout.closeDrawer(mDrawerList);
+            } else {
+                mDrawerLayout.openDrawer(mDrawerList);
+            }
+        }
+
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Add SearchWidget.
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        final EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchEditText.setHint("Name...");
+
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search(searchEditText.getText().toString().trim());
+                }
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    private void search(String searchInput) {
+        Toast.makeText(LandingPageActivity.this, "Search for !" + searchInput, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
 
     public void like (View view) {
