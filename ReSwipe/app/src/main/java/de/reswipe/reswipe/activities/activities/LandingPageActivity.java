@@ -47,36 +47,24 @@ public class LandingPageActivity extends AppCompatActivity {
 
         this.database = FirebaseDatabase.getInstance();
         this.myRef = database.getReference("recipes");
-
+        
         this.addMockRecipes();
         this.subscribeRecipeCount();
+    }
 
-        like =(Button)findViewById(R.id.like);
-        dislike =(Button)findViewById(R.id.dislike);
-        kochliste =(Button)findViewById(R.id.kochliste);
-        /*TextView textViewRecipeName = (TextView) findViewById(R.id.textViewValue);
-        textViewRecipeName.setText(recipe.name);*/
-        like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRef.child("likes").push().setValue(recipe);
-                finish();
-            }
-        });
-        dislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRef.child("dislikes").push().setValue(recipe);
-                finish();
-            }
-        });
-        kochliste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRef.child("kochliste").push().setValue(recipe);
-                finish();
-            }
-        });
+    public void like (View view) {
+        myRef.getRoot().child("likes").push().setValue(recipe);
+        this.subscribeRecipe(null);
+    }
+
+    public void dislike (View view) {
+        myRef.getRoot().child("dislikes").push().setValue(recipe);
+        this.subscribeRecipe(null);
+    }
+
+    public void kochliste (View view) {
+        myRef.getRoot().child("kochliste").push().setValue(recipe);
+        this.subscribeRecipe(null);
     }
 
     public void subscribeRecipeCount() {
@@ -103,14 +91,14 @@ public class LandingPageActivity extends AppCompatActivity {
     public void subscribeRecipe(View view) {
         Random random = new Random();
         final String randomNumber = Integer.toString(random.nextInt(this.recipeCount)+1);
-        Log.d("bla1", Integer.toString(this.recipeCount));
-        Log.d("bla2",randomNumber);
         myRef.child(randomNumber).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial recipes and again
                 // whenever data at this location is updated.
                 recipe = dataSnapshot.getValue(Recipe.class);
+                TextView textViewRecipeName = (TextView) findViewById(R.id.textViewValue);
+                textViewRecipeName.setText(recipe.name);
                 new DownloadImageTask((ImageView) findViewById(R.id.LandingPageImage))
                         .execute(recipe.image);
                 myRef.child(randomNumber).removeEventListener(this);
@@ -146,8 +134,8 @@ public class LandingPageActivity extends AppCompatActivity {
         Recipe recipe2 = new Recipe("Fleisch mit Pesto", "20 min", "Pfanne erhitzen, " +
                 "Fleisch anbraten, Fleisch mit Pesto einreiben", ingredients2, "https://firebasestorage.googleapis.com/v0/b/reswipe-db3a4.appspot.com/o/images%2F278319-960x720-rinderfilet-unter-tomaten-pesto-kruste-mit-pfannengemuese.jpg?alt=media&token=b402242f-549a-4907-b56c-e40c932defd7");
 
-        this.myRef.child("1").setValue(recipe1);
-        this.myRef.child("2").setValue(recipe2);
+        myRef.child("1").setValue(recipe1);
+        myRef.child("2").setValue(recipe2);
 
     }
 
