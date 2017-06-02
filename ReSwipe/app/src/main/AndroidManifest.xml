@@ -15,10 +15,13 @@
             android:name="android.app.default_searchable"
             android:value=".app.Search" />
 
-        <activity android:name=".activities.activities.SearchResults" >
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
+        <activity
+            android:name=".activities.activities.SearchResultsActivity"
+            android:label="@string/search_results_titel"
+            android:parentActivityName=".activities.activities.LandingPageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.reswipe.reswipe.activities.activities.LandingPageActivity" />
         </activity>
         <activity android:name=".activities.activities.LandingPageActivity">
             <intent-filter>
@@ -33,6 +36,13 @@
             android:parentActivityName=".activities.activities.LandingPageActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.reswipe.reswipe.activities.activities.LandingPageActivity" />
+        </activity>
+        <activity android:name=".activities.activities.RecipeListActivity"
+            android:parentActivityName=".activities.activities.LandingPageActivity"
+            android:label="@string/recipe_list">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.reswipe.reswipe.activities.activities.LandingPageActivity" />

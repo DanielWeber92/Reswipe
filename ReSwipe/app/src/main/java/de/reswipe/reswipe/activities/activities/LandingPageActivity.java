@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.res.Configuration;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -42,8 +45,11 @@ import de.reswipe.reswipe.activities.util.OnSwipeTouchListener;
 public class LandingPageActivity extends AppCompatActivity {
 
     public static final String RECIPE = "com.reswipe.reswipeapp.RECIPE";
+    public static final String RECIPE_SEARCH_RESULT = "com.reswipe.reswipeapp.RECIPE_SEARCH_RESULT";
+
 
     private Recipe recipe;
+    private ArrayList<Recipe> recipes;
     private int recipeCount;
 
     private ListView mDrawerList;
@@ -95,6 +101,7 @@ public class LandingPageActivity extends AppCompatActivity {
         
         this.addMockRecipes();
         this.subscribeRecipeCount();
+        this.subscribeRecipes(null);
     }
 
     private void setupDrawer() {
@@ -120,14 +127,19 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Recipe List", "Shopping List", "Connect Account"};
+        String[] osArray = { "Recipe List", "Shopping List", "Connect Accounts"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(LandingPageActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                if (position == 0) {
+                    Intent i = new Intent(LandingPageActivity.this, RecipeListActivity.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(LandingPageActivity.this, "Not jet implemented!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -188,7 +200,20 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     private void search(String searchInput) {
-        Toast.makeText(LandingPageActivity.this, "Search for !" + searchInput, Toast.LENGTH_SHORT).show();
+
+        ArrayList<Recipe> searchResult = new ArrayList<>();
+
+
+        for (Recipe r: this.recipes) {
+            if (r != null && r.getName() != null && r.getName().toLowerCase().contains(searchInput.toLowerCase())) {
+                searchResult.add(r);
+            }
+        }
+
+        Intent intent = new Intent(this, SearchResultsActivity.class);
+        intent.putExtra(RECIPE_SEARCH_RESULT, searchResult);
+        startActivity(intent);
+
     }
 
     @Override
@@ -214,7 +239,7 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     public void kochliste (View view) {
-        myRef.getRoot().child("kochliste").push().setValue(recipe);
+        myRef.getRoot().child("tocook").push().setValue(recipe);
         this.subscribeRecipe(null);
     }
 
@@ -262,7 +287,25 @@ public class LandingPageActivity extends AppCompatActivity {
         });
     }
 
-    /** Called when the user taps the Send button */
+    public void subscribeRecipes(View view) {
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<ArrayList<Recipe>> type = new GenericTypeIndicator<ArrayList<Recipe>>() {};
+
+                recipes = dataSnapshot.getValue(type);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+    }
+
     public void showRecipeDetails(View view) {
         Intent intent = new Intent(this, RecipeDetailsActivity.class);
         intent.putExtra(RECIPE, recipe);
@@ -271,21 +314,20 @@ public class LandingPageActivity extends AppCompatActivity {
 
     public void addMockRecipes() {
         List<String> ingredients1 = new ArrayList<>();
-        List<String> ingredients2 = new ArrayList<>();
         ingredients1.add("250g Spaghetti");
         ingredients1.add("100g Pesto");
-        ingredients2.add("250g Fleisch");
-        ingredients2.add("100g Pesto");
-
         Recipe recipe1 = new Recipe("Spaghetti mit Pesto", "20 min", "Wasser zum kochen bringen, " +
                 "Salz + Spaghetti ins Wasser geben, 10 minuten warten, " +
                 "Spaghetti vom Wasser trennen, " +
                 "Pesto mit Wasser verdünnen und zu Spaghettis geben", ingredients1, "https://firebasestorage.googleapis.com/v0/b/reswipe-db3a4.appspot.com/o/images%2FSpaghettiBolognese.jpg?alt=media&token=e59605b1-6f4c-422b-a6f5-c450368c05bc");
+        myRef.child("1").setValue(recipe1);
 
+
+        List<String> ingredients2 = new ArrayList<>();
+        ingredients2.add("250g Fleisch");
+        ingredients2.add("100g Pesto");
         Recipe recipe2 = new Recipe("Fleisch mit Pesto", "20 min", "Pfanne erhitzen, " +
                 "Fleisch anbraten, Fleisch mit Pesto einreiben", ingredients2, "https://firebasestorage.googleapis.com/v0/b/reswipe-db3a4.appspot.com/o/images%2F278319-960x720-rinderfilet-unter-tomaten-pesto-kruste-mit-pfannengemuese.jpg?alt=media&token=b402242f-549a-4907-b56c-e40c932defd7");
-
-        myRef.child("1").setValue(recipe1);
         myRef.child("2").setValue(recipe2);
 
     }

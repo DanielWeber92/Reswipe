@@ -24,4 +24,8 @@ public class Recipe implements Serializable {
     }
 
     public Recipe () { }
+
+    public String getName() {
+        return this.name;
+    }
 }

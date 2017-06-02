@@ -23,7 +23,7 @@
             android:layout_alignStart="@+id/LandingPageImage"
             android:layout_marginBottom="16dp"
             android:onClick="dislike"
-            android:text="Dislike"
+            android:text="@string/add_to_list_2"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="16dp"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -36,7 +36,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
             android:onClick="kochliste"
-            android:text="Kochliste"
+            android:text="@string/add_to_list_3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
@@ -51,22 +51,24 @@
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
             android:onClick="like"
-            android:text="Like"
+            android:text="@string/add_to_list_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/LandingPageImage"
             android:layout_width="341dp"
-            android:layout_height="305dp"
+            android:layout_height="258dp"
             android:clickable="true"
             android:onClick="showRecipeDetails"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewValue" />
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewValue"
+            tools:layout_editor_absoluteX="22dp"
+            app:layout_constraintHorizontal_bias="0.518" />
 
         <TextView
             android:id="@+id/textViewValue"
@@ -82,6 +84,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="149dp"
+            android:layout_height="41dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="showRecipeDetails"
+            android:text="@string/showDetails"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LandingPageImage" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -7,8 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.reswipe.reswipe.R;
 import de.reswipe.reswipe.activities.models.Recipe;
@@ -16,17 +21,22 @@ import de.reswipe.reswipe.activities.util.DownloadImageTask;
 
 
 public class RecipeDetailsActivity extends AppCompatActivity {
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+        this.database = FirebaseDatabase.getInstance();
+        this.myRef = database.getReference("recipes");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        Recipe recipe = (Recipe) intent.getExtras().getSerializable(LandingPageActivity.RECIPE);
+        recipe = (Recipe) intent.getExtras().getSerializable(LandingPageActivity.RECIPE);
 
         // Capture the layout's TextView and set the string as its text
         TextView recipeNameValueView = (TextView) findViewById(R.id.textViewNameValue);
@@ -43,6 +53,12 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         new DownloadImageTask((ImageView) findViewById(R.id.RecipeDetailsImageView))
                 .execute(recipe.image);
+    }
+
+    public void kochliste(View view) {
+        myRef.getRoot().child("kochliste").push().setValue(recipe);
+        Toast.makeText(RecipeDetailsActivity.this, "Recipe saved!", Toast.LENGTH_SHORT).show();
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     @Override
