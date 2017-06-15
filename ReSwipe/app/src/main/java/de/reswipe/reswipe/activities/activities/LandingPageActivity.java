@@ -99,7 +99,7 @@ public class LandingPageActivity extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance();
         this.myRef = database.getReference("recipes");
         
-        this.addMockRecipes();
+        // this.addMockRecipes();
         this.subscribeRecipeCount();
         this.subscribeRecipes(null);
     }
