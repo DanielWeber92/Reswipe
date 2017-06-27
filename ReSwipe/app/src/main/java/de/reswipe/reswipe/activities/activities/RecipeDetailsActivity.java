@@ -56,7 +56,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     public void kochliste(View view) {
-        myRef.getRoot().child("kochliste").push().setValue(recipe);
+        myRef.getRoot().child("tocook").push().setValue(recipe);
         Toast.makeText(RecipeDetailsActivity.this, "Recipe saved!", Toast.LENGTH_SHORT).show();
         NavUtils.navigateUpFromSameTask(this);
     }
