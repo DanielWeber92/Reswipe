@@ -138,7 +138,7 @@ public class LandingPageActivity extends AppCompatActivity {
                     Intent i = new Intent(LandingPageActivity.this, RecipeListActivity.class);
                     startActivity(i);
                 } else {
-                    Toast.makeText(LandingPageActivity.this, "Not jet implemented!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LandingPageActivity.this, "Not yet implemented!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -104,7 +104,7 @@ public class RecipeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(RecipeListActivity.this, "Not jet implemented!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecipeListActivity.this, "Not yet implemented!", Toast.LENGTH_SHORT).show();
             }
 
         });
